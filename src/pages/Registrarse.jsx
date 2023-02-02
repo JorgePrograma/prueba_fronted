@@ -40,7 +40,6 @@ function Registrarse() {
     }
 
     axiosClient.get('/sanctum/csrf-cookie').then(response => {
-
       axiosClient.post('api/registro', data)
         .then(({ data }) => {
           setUser(data.usuario)

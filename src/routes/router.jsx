@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import DefaultLayout from '../components/contents/DefaultLayout';
 import GuestLayout from '../components/contents/GuestLayout';
 import Detalles from '../pages/Detalles';
+import Inicio from '../pages/Inicio';
 import Lista from '../pages/Lista';
 import Loguin from '../pages/Loguin';
 import NotFound from '../pages/NotFound';
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Navigate to="/lista"/>
+        element: <Navigate to="/inicio"/>
       },
       {
         path: '/lista',
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/detalles/:id',
         element: <Detalles />
+      },
+      {
+        path: '/inicio',
+        element: <Inicio />
       },
       {
         path: "*",
