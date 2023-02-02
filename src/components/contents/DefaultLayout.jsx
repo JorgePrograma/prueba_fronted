@@ -5,20 +5,10 @@ import axiosClient from "../../utilies/axios-client";
 import Navbar from '../Navbar';
 
 function DefaultLayout() {
-  const { user, token, setUser, setToken } = useStateContext();
+  const {token } = useStateContext();
 
   if (!token) {
     return <Navigate to="login" />
-  }
-
-  const onLogout = ev => {
-    ev.preventDefault()
-
-    axiosClient.post('/logout')
-      .then(() => {
-        setUser({})
-        setToken(null)
-      })
   }
 
   return (

@@ -24,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/detalles/:id',
         element: <Detalles />
+      },
+      {
+        path: "*",
+        element: <NotFound/>
       }
     ]
   },
@@ -40,10 +44,6 @@ const router = createBrowserRouter([
         element: <Registrarse/>
       }
     ]
-  },
-  {
-    path: "*",
-    element: <NotFound/>
   }
 ])
 
