@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Detalles from '../pages/Detalles';
+import { URL } from '../utilies/Utilidades';
 import CardsEpisodios from './CardsEpisodios';
 
-function Episodios() {
+function Episodios({dato}) {
   const [buscar, setBuscar] = useState("episode/1");
   const [data, setData] = useState([]);
 
   const fetchBusqueda = async () => {
-    await fetch(`https://rickandmortyapi.com/api/${buscar}`)
+    await fetch(`${URL}/episode/${buscar}`)
       .then(response => response.json()).
       then(datos => {
         const my = datos;
@@ -24,6 +24,7 @@ function Episodios() {
   return (
     <div className='flex flex-col'>
       <div>
+      {}
         <CardsEpisodios dato={data}/>
       </div>
     </div>

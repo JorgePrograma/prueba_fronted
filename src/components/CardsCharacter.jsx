@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const CardsCharacter = ({dato}) => {
+const CardsCharacter = ({ dato }) => {
   return (
-    <div className={`flex flex-col shadow m-2 rounded-md hover:bg-slate-300`} onClick={()=>{alert(dato.name)}}>
+    <Link className={`flex flex-col shadow m-2 rounded-md hover:bg-slate-300`} to={`/detalles/${dato.id}`}>
       <div className='mt-5 hover:opacity-75 cursor-pointer relative'>
         <div className='flex flex-col items-center justify-center gap-2'>
           <img src={dato.image} alt={dato.name} className="flex w-40 h-40 rounded-full  hover:translate-x-5 hover:duration-150" />
@@ -12,7 +13,7 @@ const CardsCharacter = ({dato}) => {
           <p className='px-2'>Genero <span className='font-normal'> {dato.gender}</span></p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

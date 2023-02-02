@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import CardsDetalles from '../components/CardsDetalles';
 import Episodios from '../components/Episodios';
+import { URL } from '../utilies/Utilidades';
 
 function Detalles() {
-  const [buscar, setBuscar] = useState("character/2");
   const [data, setData] = useState([]);
+  const { id } = useParams();
 
   const fetchBusqueda = async () => {
-    await fetch(`https://rickandmortyapi.com/api/${buscar}`)
+    await fetch(`${URL}/character/${id}`)
       .then(response => response.json()).
       then(datos => {
         const my = datos;
@@ -16,18 +18,14 @@ function Detalles() {
       catch(error => console.log(error))
   }
 
-
   useEffect(() => {
     fetchBusqueda();
-    console.log("efect")
-    console.log(data);
   }, [])
 
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col gap-20 mt-10'>
         <CardsDetalles datos={data} />
-        <Episodios />
       </div>
     </div>
   );
