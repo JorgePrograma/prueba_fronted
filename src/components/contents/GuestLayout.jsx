@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../../context/ContextProvider';
 
 function GuestLayout() {
-  const { user, token } = useStateContext();
+  const { token } = useStateContext();
 
   if (token) {
     return <Navigate to="/" />

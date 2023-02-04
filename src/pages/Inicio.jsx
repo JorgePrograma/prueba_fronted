@@ -1,13 +1,9 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
+
+import Favoritos from './Favoritos';
 
 function Inicio() {
-  
-  return (
-    <div className='flex h-screen'>
-      Inicio
-    </div>
-  );
+
+  <Favoritos/>
 }
 
 export default Inicio;

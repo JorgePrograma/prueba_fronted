@@ -3,6 +3,7 @@ import { useStateContext } from '../context/ContextProvider.jsx'
 import React, { useState } from 'react';
 import swal from 'sweetalert';
 import { Link, Navigate } from 'react-router-dom';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 function Loguin() {
 
@@ -28,22 +29,23 @@ function Loguin() {
       password: cuenta.password
     }
 
-    axiosClient.get('/sanctum/csrf-cookie').then(response => {
-      axiosClient.post('api/login', data)
-        .then(({ data }) => {
+    axiosClient.get('/sanctum/csrf-cookie')
+      .then(() => {
+        return axiosClient.post('api/loguin', data).then(({ data }) => {
           setUser(data.usuario)
           setToken(data.acess_token);
-          swal(data.mensaje, "success");
+          const mensaje = data.mensaje
+          swal(mensaje, "success");
         })
-        .catch((err) => {
-          const response = err.response;
-          if (response && response.status === 422) {
-            if (response.data.mensaje) {
-              setMensaje(response.data.mensaje);
-            } 
-          }
-        })
-    });
+          .catch((err) => {
+            const response = err.response;
+            if (response && response.status === 422) {
+              if (response.data.mensaje) {
+                setMensaje(response.data.mensaje);
+              }
+            }
+          })
+      });
 
   }
 
@@ -59,15 +61,15 @@ function Loguin() {
         <form onSubmit={handleSubmit}>
           <div className='flex flex-col gap-2 border shadow rounded-md mx-2 p-6 '>
             <div className="w-full flex flex-col gap-2">
-              <label className='font-bold text-lg'>Correo</label>
-              <input className='border rounded-md p-2' name='email' onChange={handleChange} />
+              <label className='font-bold text-lg'>Email</label>
+              <input className='border rounded-md p-2' name='email' type="email" onChange={handleChange} />
             </div>
 
             <div className="w-full flex flex-col">
               <label className='font-bold text-lg'>Password</label>
               <div className='flex border rounded-md items-center bg-white'>
                 <input className=' p-2 outline-none flex-1' name="password" type={`${verPassword ? "password" : "text"}`} onChange={handleChange} />
-                <label className={`mx-2 hover:cursor-pointer`} onClick={handlePass1}>{verPassword ? "ver" : "ocultar"}</label>
+                <label className={`mx-2 hover:cursor-pointer`} onClick={handlePass1}>{verPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</label>
               </div>
             </div>
 

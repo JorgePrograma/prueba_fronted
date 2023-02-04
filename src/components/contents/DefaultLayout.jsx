@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../../context/ContextProvider';
 import axiosClient from "../../utilies/axios-client";
 import Navbar from '../Navbar';
 
 function DefaultLayout() {
-  const {token } = useStateContext();
+  const {token, setUser } = useStateContext();
 
   if (!token) {
     return <Navigate to="login" />

@@ -2,7 +2,9 @@ import React from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import DefaultLayout from '../components/contents/DefaultLayout';
 import GuestLayout from '../components/contents/GuestLayout';
+import Ajuste from '../pages/Ajuste';
 import Detalles from '../pages/Detalles';
+import Favoritos from '../pages/Favoritos';
 import Inicio from '../pages/Inicio';
 import Lista from '../pages/Lista';
 import Loguin from '../pages/Loguin';
@@ -12,15 +14,15 @@ import Registrarse from '../pages/Registrarse';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <DefaultLayout/>,
+    element: <DefaultLayout />,
     children: [
       {
         path: '/',
-        element: <Navigate to="/inicio"/>
+        element: <Navigate to="/inicio" />
       },
       {
         path: '/lista',
-        element: <Lista/>
+        element: <Lista />
       },
       {
         path: '/detalles/:id',
@@ -31,22 +33,30 @@ const router = createBrowserRouter([
         element: <Inicio />
       },
       {
+        path: '/favoritos',
+        element: <Favoritos />
+      },
+      {
+        path: '/ajustes',
+        element: <Ajuste />
+      },
+      {
         path: "*",
-        element: <NotFound/>
+        element: <NotFound />
       }
     ]
   },
   {
     path: '/',
-    element: <GuestLayout/>,
+    element: <GuestLayout />,
     children: [
       {
         path: '/login',
-        element: <Loguin/>
+        element: <Loguin />
       },
       {
         path: '/registrarse',
-        element: <Registrarse/>
+        element: <Registrarse />
       }
     ]
   }
