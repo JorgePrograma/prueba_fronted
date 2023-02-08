@@ -29,8 +29,8 @@ function CuentaDelete() {
       })
       .then(({ data }) => {
         const mensaje = data.mensaje
-        //setUser({})
-        //setToken(null)
+        setUser({})
+        setToken(null)
         swal(mensaje, "", "success");
       })
       .catch((error) => {
@@ -42,7 +42,6 @@ function CuentaDelete() {
           }else{
             const mensaje = response.data.mensaje;
             swal(mensaje,"", "error")
-
           }
         }
       });

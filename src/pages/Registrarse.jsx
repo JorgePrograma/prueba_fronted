@@ -11,6 +11,7 @@ function Registrarse() {
     {
       name: "", email: "", city: "", password: "", password_confirmation: ""
     });
+    
   const { setUser, setToken } = useAuth();
   const [mensaje, setMensaje] = useState("");
   const [verPassword, setverPassword] = useState(true);

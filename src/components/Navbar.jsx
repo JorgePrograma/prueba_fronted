@@ -34,10 +34,10 @@ function Navbar() {
           <span className="font-semibold text-xl">{(user.name).split(" ",1)}</span>
         </Link>
 
-        <Link to="/lista" className='inline-block text-xl sm:px-4 py-2 leading-none md:border-b rounded text-white border-white mr-2 
+        <Link to="/personajes" className='inline-block text-xl sm:px-4 py-2 leading-none md:border-b rounded text-white border-white mr-2 
          hover:border-transparent hover:text-teal-500 hover:bg-white  lg:mt-0'>Personajes</Link>
 
-        <Link to="/favoritos" className='inline-block text-xl sm:px-4 py-2 leading-none md:border-b rounded text-white border-white mr-2 
+        <Link to="personajes/favoritos" className='inline-block text-xl sm:px-4 py-2 leading-none md:border-b rounded text-white border-white mr-2 
          hover:border-transparent hover:text-teal-500 hover:bg-white  lg:mt-0 '>Favoritos</Link>
       </div>
 

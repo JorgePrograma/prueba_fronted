@@ -3,7 +3,6 @@ import axiosClient from '../utilies/axios-client';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useAuth } from '../context/ContextProvider';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
 import CuentaDelete from '../components/CuentaDelete';
 function Ajuste() {
 
@@ -15,8 +14,7 @@ function Ajuste() {
 
   const [mensaje, setMensaje] = useState("");
   const [verPassword, setverPassword] = useState(true);
-  const [verPasswordConfirmation, setverPasswordConfirmation] = useState(true);
-
+  
   useEffect(() => {
     setUsuario({
       name: user.name || "",
@@ -72,10 +70,6 @@ function Ajuste() {
 
   const handlePass1 = () => {
     setverPassword(!verPassword);
-  }
-
-  const handlePass2 = () => {
-    setverPasswordConfirmation(!verPasswordConfirmation);
   }
 
   return (

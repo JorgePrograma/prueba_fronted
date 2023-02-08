@@ -7,14 +7,14 @@ import { URL } from '../utilies/Utilidades';
 function Lista() {
   const [filter, setFilter] = useState('character');
   const [data, setData] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(5)
   const [hasMores, setHasMore] = useState(false)
 
   useEffect(() => {
     fetchData();
-    console.log(currentPage)
     window.addEventListener("scroll", handleScroll);
+    setHasMore(false)
     return () => {
       window.removeEventListener("scroll", handleScroll);
     }
@@ -37,7 +37,9 @@ function Lista() {
       document.documentElement.offsetHeight
     ) {
       if (currentPage < totalPages) {
+        setHasMore(true);
         setCurrentPage(currentPage + 1);
+        console.log(currentPage)
       }
     }
   };
@@ -63,7 +65,7 @@ function Lista() {
           <li className={`border p-2 cursor-pointer hover:bg-green-300 rounded-md ${filter === "episode" ? "bg-slate-300" : ""}`} onClick={() => (setFilter("episode"), setCurrentPage(1), setData([]))}>episodes</li>
         </ul>
       </div>
-      <div className={`${filter === "character" ? "grid grid-cols-2 md:grid-cols-4 sm:grid-cols-3 lg:grid-cols-5" : filter === "location" ? "md:grid grid-cols-2" : ""} `} onScroll={handleScroll}>
+      <div className={`bg-slate-100 grid grid-cols-2 ${filter === "character" ? "md:grid-cols-4 sm:grid-cols-3 lg:grid-cols-5" : filter === "location" ? "md:grid grid-cols-3" : "grid grid-cols-4"} `} onScroll={handleScroll}>
         {!data ? (<SkeletonsCardCharacter />) : (renderCards())
         }
       </div>

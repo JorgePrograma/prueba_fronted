@@ -1,47 +1,45 @@
-import React from 'react';
-import swal from 'sweetalert';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/ContextProvider';
-import axiosClient from '../utilies/axios-client';
 
 function CardsDetalles({ datos }) {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
 
-  const handleEnvio = () => {
-    const data = {
-      ref_api: datos.id,
-      user_id: user.id,
-    }
+  useEffect(() => {
+    setLoading(false);
+  }, [datos.location]);
 
-    axiosClient.get('/sanctum/csrf-cookie')
-      .then(() => {
-        return axiosClient.post('api/crear', data)
-      })
-      .then(({ data }) => {
-        const mensaje = data.mensaje
-        swal(mensaje, "", "success");
-      })
-      .catch(error => {
-        const status = error.response.status
-        if (status === 409) {
-          const mensaje = error.response.data.mensaje
-          swal(mensaje, "Agregue otro nuevo", "info");
-        }
-      });
 
-  }
-
-  return (
+  return loading ? (<div className='flex sm:flex-row flex-col items-center justify-center'>
+    <p>Cargando...</p>
+  </div>
+  ) : (
     <div className='flex sm:flex-row flex-col items-center justify-center gap-24'>
-      <img src={datos.image} alt={datos.name} className="w-80 bg-red-400 rounded-2xl border-4 border-slate-400" />
-      <div className='flex flex-col gap-5'>
-        <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Nombre</strong> {datos.name}</p>
+      <div className='flex flex-col'>
+        <img src={datos.image} alt={datos.name} className="w-96 h-96 rounded-2xl border-4 border-slate-400" />
+      </div>
+
+      <div className='flex flex-col gap-2 mx-4'>
+        <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Name</strong> {datos.name}</p>
         <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Status</strong> {datos.status}</p>
         <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Especies</strong> {datos.species}</p>
+        <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Type</strong> {datos.type}</p>
         <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Gender</strong> {datos.gender}</p>
-        <button className='p-3 border rounded-2xl text-2xl font-bold hover:bg-indigo-400' onClick={handleEnvio}>guardar</button>
+        <Link to={`../localitation/${!datos.origin ? "" : (datos.origin.url).split("/")[5]}`} className='text-4xl font-serif font-bold'>
+          Origin
+          <strong className='font-normal mr-3 mx-3 hover:underline hover:underline-offset-8'>{!datos.origin ? "" : datos.origin.name}</strong>
+        </Link>
+        <Link to={`../localitation/${!datos.location ? "" : (datos.location.url).split("/")[5]}`} className='text-4xl font-serif font-bold'>
+          Localizacion
+          <strong className='font-normal mr-3 mx-3 hover:underline hover:underline-offset-8'>{!datos.location ? "" : datos.location.name}</strong>
+        </Link>
+        <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Episodios disponibles</strong>
+          {!datos.episode ? "" : datos.episode.length}
+        </p>
+        <p className='text-4xl font-serif'><strong className='font-bold text-4xl mr-3'>Created</strong> {datos.created}</p>
       </div>
-    </div>
-  );
+    </div>)
 }
 
 export default CardsDetalles;

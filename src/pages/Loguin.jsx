@@ -2,14 +2,14 @@ import axiosClient from '../utilies/axios-client';
 import { useStateContext } from '../context/ContextProvider.jsx'
 import React, { useState } from 'react';
 import swal from 'sweetalert';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 function Loguin() {
 
   const [cuenta, setCuenta] = useState({ email: "", password: "" });
   const [mensaje, setMensaje] = useState(null);
-  const { setUser, setToken, user } = useStateContext();
+  const { setUser, setToken } = useStateContext();
   const [verPassword, setverPassword] = useState(true);
 
   const handleChange = (e) => {
@@ -35,7 +35,7 @@ function Loguin() {
           setUser(data.usuario)
           setToken(data.acess_token);
           const mensaje = data.mensaje
-          swal(mensaje, "success");
+          swal("Exitoso", mensaje, "success");
         })
           .catch((err) => {
             const response = err.response;

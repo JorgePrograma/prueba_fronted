@@ -5,16 +5,16 @@ import axiosClient from "../../utilies/axios-client";
 import Navbar from '../Navbar';
 
 function DefaultLayout() {
-  const {token, setUser } = useStateContext();
+  const { token, setUser } = useStateContext();
 
   if (!token) {
     return <Navigate to="login" />
   }
 
   return (
-    <div>
+    <div className=''>
       <Navbar />
-      <main>
+      <main className='w-full h-full'>
         <Outlet />
       </main>
     </div>
